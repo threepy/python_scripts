@@ -3,14 +3,12 @@
 
 from lxml import etree
 import urllib2
-import numpy as np
 import matplotlib.pyplot as plt
 
 city = '北京市'
 startdate = '2015-01-01'
-enddate = '2015-12-24'
-
-# 设置支持中文
+enddate = '2015-12-25'
+# 设置支持中文显示
 from matplotlib.font_manager import FontProperties
 font = FontProperties(fname=r"c:\windows\fonts\simsun.ttc", size=14)
 # 获取数据
@@ -61,9 +59,8 @@ def get_weekData(aqi_list):
 def plot(data):
     # 设置style
     plt.style.use('bmh')
-
     # 设置图标标题
-    str =  city.decode('utf-8') + startdate.decode('utf-8') + u'至' + enddate.decode('utf-8') + u'空气质量指数走势图'
+    str =  city.decode('utf-8') + startdate.decode('utf-8') + u'至' + enddate.decode('utf-8') + u'每周平均空气质量指数走势图'
     plt.title(str, fontproperties=font)
     # 设置x轴的文字
     plt.xlabel(u'日期', fontproperties=font)
@@ -105,13 +102,17 @@ def pie(data):
             lv6 = lv6 + 1
     list =[lv1, lv2, lv3, lv4, lv5, lv6]
     labels = 'Good', 'Green', 'Moderate', 'Yellow', 'Lightly Polluted', 'Orange'
-    colors = ['green', 'blue', 'gray', 'yellow', 'red', 'orange']
+    colors = ['blue', 'green', 'gray', 'yellow', 'red', 'orange']
     explode = (0, 0.1, 0, 0, 0, 0)
     title = city.decode('utf-8') + startdate.decode('utf-8') + u'至' + enddate.decode('utf-8') + u' AQI分布图'
     plt.title(title, fontproperties=font)
     plt.pie(list, explode=explode, labels=labels, colors=colors,
             autopct='%1.1f%%', shadow=True, startangle=0)
     plt.show()
+# 绘制柱状图
+def histogram():
+    pass
+
 if __name__ == '__main__':
     data = getData()
     plot(data)
