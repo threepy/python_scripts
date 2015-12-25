@@ -113,6 +113,7 @@ def pie(data):
 def histogram():
     pass
 
+
 if __name__ == '__main__':
     data = getData()
     plot(data)
